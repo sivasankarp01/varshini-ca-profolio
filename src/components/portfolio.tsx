@@ -16,10 +16,12 @@ import {
   MapPin,
   Menu,
   MessageSquareText,
+  Moon,
   Phone,
   ReceiptIndianRupee,
   Send,
   ShieldCheck,
+  Sun,
   Users,
   X,
 } from "lucide-react";
@@ -44,6 +46,22 @@ function SectionHeading({ eyebrow, title, intro }: { eyebrow: string; title: str
 
 function Header({ activeSection }: { activeSection: string }) {
   const [open, setOpen] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem("portfolio-theme");
+    const shouldUseDark = savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.classList.toggle("dark", shouldUseDark);
+    setDarkTheme(shouldUseDark);
+  }, []);
+
+  function toggleTheme() {
+    const nextTheme = !darkTheme;
+    setDarkTheme(nextTheme);
+    document.documentElement.classList.toggle("dark", nextTheme);
+    window.localStorage.setItem("portfolio-theme", nextTheme ? "dark" : "light");
+  }
+
   return (
     <header className="site-header">
       <div className="site-nav">
@@ -59,6 +77,17 @@ function Header({ activeSection }: { activeSection: string }) {
         </nav>
         <Button asChild className="desktop-hire">
           <a href={`mailto:${portfolio.email}`}>Hire Me</a>
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="theme-toggle"
+          aria-label={darkTheme ? "Switch to light theme" : "Switch to dark theme"}
+          title={darkTheme ? "Light theme" : "Dark theme"}
+          onClick={toggleTheme}
+        >
+          {darkTheme ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
         </Button>
         <Button
           type="button"

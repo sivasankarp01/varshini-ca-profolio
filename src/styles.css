@@ -88,6 +88,8 @@
   --surface: oklch(1 0 0);
   --soft-blue: oklch(0.955 0.022 257);
   --success: oklch(0.55 0.12 164);
+  --contact-background: oklch(0.235 0.055 254);
+  --contact-foreground: oklch(1 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -123,6 +125,13 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.551 0.027 264.364);
+  --navy: oklch(0.94 0.012 255);
+  --navy-soft: oklch(0.38 0.04 257);
+  --surface: oklch(0.18 0.035 260);
+  --soft-blue: oklch(0.27 0.06 259);
+  --success: oklch(0.72 0.14 160);
+  --contact-background: oklch(0.105 0.03 260);
+  --contact-foreground: oklch(0.97 0.006 250);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -170,6 +179,7 @@
   .container { width: min(100% - 2rem, 72rem); margin-inline: auto; }
   .site-header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid color-mix(in oklab, var(--border) 82%, transparent); background: color-mix(in oklab, var(--surface) 94%, transparent); backdrop-filter: blur(12px); }
   .site-nav { width: min(100% - 2rem, 72rem); min-height: 4.5rem; margin-inline: auto; display: flex; align-items: center; gap: 1.5rem; }
+  .theme-toggle { flex: none; color: var(--navy); }
   .brand { display: inline-flex; align-items: center; gap: .7rem; color: var(--navy); font-size: .95rem; font-weight: 800; text-decoration: none; white-space: nowrap; }
   .brand span { display: grid; width: 2.1rem; height: 2.1rem; place-items: center; border-radius: .35rem; background: var(--navy); color: var(--primary-foreground); font-size: .75rem; letter-spacing: .04em; }
   .desktop-nav { display: flex; align-items: center; justify-content: center; gap: 1.55rem; margin-left: auto; }
@@ -249,15 +259,17 @@
   .languages h2 { margin: 0; color: var(--navy); font-size: 1.5rem; }
   .languages div { display: flex; gap: .6rem; }
   .languages span { border: 1px solid var(--border); border-radius: .3rem; padding: .55rem 1rem; background: var(--surface); color: var(--navy); font-weight: 700; }
-  .contact-section { padding: 6rem 0; background: var(--navy); color: var(--primary-foreground); }
+  .contact-section { padding: 6rem 0; background: var(--contact-background); color: var(--contact-foreground); }
   .contact-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(3rem, 8vw, 7rem); align-items: center; }
-  .contact-copy h2 { color: var(--primary-foreground); }
-  .contact-copy > p:not(.section-kicker) { color: color-mix(in oklab, var(--primary-foreground) 72%, transparent); line-height: 1.75; }
+  .contact-copy h2 { color: var(--contact-foreground); }
+  .contact-copy > p:not(.section-kicker) { color: color-mix(in oklab, var(--contact-foreground) 72%, transparent); line-height: 1.75; }
   .contact-list { display: grid; gap: .8rem; margin: 2rem 0; }
-  .contact-list .contact-link { color: var(--primary-foreground); }
+  .contact-list .contact-link { color: var(--contact-foreground); }
   .contact-list .contact-link svg { color: color-mix(in oklab, var(--primary) 65%, white); }
-  .contact-actions > :first-child { background: var(--primary-foreground); color: var(--navy); }
-  .contact-actions > :last-child { border-color: color-mix(in oklab, var(--primary-foreground) 30%, transparent); background: transparent; color: var(--primary-foreground); }
+  .contact-actions > :first-child { background: var(--contact-foreground); color: var(--contact-background); }
+  .contact-actions > :first-child:hover { background: color-mix(in oklab, var(--contact-foreground) 88%, transparent); }
+  .contact-actions > :last-child { border-color: color-mix(in oklab, var(--contact-foreground) 42%, transparent); background: transparent; color: var(--contact-foreground); }
+  .contact-actions > :last-child:hover { border-color: var(--contact-foreground); background: var(--contact-foreground); color: var(--contact-background); }
   .contact-form { display: grid; gap: 1rem; padding: 2rem; border-radius: var(--radius); background: var(--surface); color: var(--navy); }
   .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
   .contact-form label { display: grid; gap: .45rem; font-size: .78rem; font-weight: 700; }
@@ -265,12 +277,12 @@
   .contact-form textarea { resize: vertical; }
   .field-error { margin: 0; color: var(--destructive); font-size: .72rem; font-weight: 500; }
   .form-note { margin: 0; color: var(--muted-foreground); font-size: .72rem; line-height: 1.5; }
-  footer { border-top: 1px solid var(--navy-soft); background: var(--navy); color: color-mix(in oklab, var(--primary-foreground) 60%, transparent); }
+  footer { border-top: 1px solid color-mix(in oklab, var(--contact-foreground) 15%, transparent); background: var(--contact-background); color: color-mix(in oklab, var(--contact-foreground) 60%, transparent); }
   .footer-inner { min-height: 5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: .75rem; }
   .footer-inner p { margin: 0; }
   .footer-inner nav { display: flex; gap: 1.2rem; }
   .footer-inner a { color: inherit; text-decoration: none; }
-  .footer-inner a:hover { color: var(--primary-foreground); }
+  .footer-inner a:hover { color: var(--contact-foreground); }
   .back-to-top { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 40; box-shadow: 0 8px 25px color-mix(in oklab, var(--navy) 22%, transparent); }
   .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
   .reveal.is-visible { opacity: 1; transform: none; }
@@ -278,7 +290,8 @@
 
 @media (max-width: 900px) {
   .desktop-nav, .desktop-hire { display: none; }
-  .mobile-trigger { margin-left: auto; }
+  .theme-toggle { margin-left: auto; }
+  .mobile-trigger { margin-left: -.75rem; }
   .mobile-nav { display: grid; gap: .2rem; padding: .75rem 1rem 1rem; border-top: 1px solid var(--border); background: var(--surface); }
   .mobile-nav > a { padding: .7rem .4rem; color: var(--navy); font-size: .9rem; font-weight: 600; text-decoration: none; }
   .hero-inner { min-height: auto; max-height: none; grid-template-columns: 1fr; gap: 3rem; padding-block: 4.5rem; }
