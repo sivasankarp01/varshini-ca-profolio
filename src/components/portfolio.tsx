@@ -145,10 +145,9 @@ function ContactForm() {
       setNotice("Please review the highlighted fields.");
       return;
     }
-    const subject = encodeURIComponent(String(values["subject"]));
-    const body = encodeURIComponent(`Name: ${values["name"]}\nEmail: ${values["email"]}\n\n${values["message"]}`);
-    setNotice("Your email application is opening. Please send the prepared message from there.");
-    window.location.href = `mailto:${portfolio.email}?subject=${subject}&body=${body}`;
+    const text = encodeURIComponent(`Name: ${values["name"]}\nEmail: ${values["email"]}\nSubject: ${values["subject"]}\n\n${values["message"]}`);
+    setNotice("Opening WhatsApp with your message. Please tap send to deliver it.");
+    window.open(`https://wa.me/919345275021?text=${text}`, "_blank", "noopener,noreferrer");
   }
 
   const fieldError = (name: string) => errors[name] ? <p className="field-error" id={`${name}-error`}>{errors[name]}</p> : null;
@@ -161,8 +160,8 @@ function ContactForm() {
       </div>
       <label>Subject<Input name="subject" aria-invalid={Boolean(errors["subject"])} aria-describedby={errors["subject"] ? "subject-error" : undefined} placeholder="Role or opportunity" />{fieldError("subject")}</label>
       <label>Message<Textarea name="message" rows={5} aria-invalid={Boolean(errors["message"])} aria-describedby={errors["message"] ? "message-error" : undefined} placeholder="Tell me about the opportunity" />{fieldError("message")}</label>
-      <Button type="submit" size="lg"><Send />Prepare Email</Button>
-      <p className="form-note" aria-live="polite">{notice || "Submitting prepares an email in your email application; no message is sent automatically."}</p>
+      <Button type="submit" size="lg"><Send />Send via WhatsApp</Button>
+      <p className="form-note" aria-live="polite">{notice || "Submitting opens WhatsApp with your message prefilled; tap send to deliver it."}</p>
     </form>
   );
 }
