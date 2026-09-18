@@ -312,3 +312,11 @@
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+@media (max-width: 900px) {
+  .mobile-trigger { display: inline-flex !important; }
+}
+
+@media (min-width: 901px) {
+  .mobile-trigger, .mobile-nav { display: none !important; }
+}
