@@ -30,6 +30,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { navigation, portfolio } from "@/data/portfolio";
+import resumeAsset from "@/assets/CV_VARSHINI.pdf.asset.json";
 
 const strengthIcons = [CheckCircle2, MessageSquareText, FileCheck2, Users, ShieldCheck];
 const skillIcons = [Calculator, ReceiptIndianRupee, FileCheck2, Landmark];
