@@ -30,6 +30,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { navigation, portfolio } from "@/data/portfolio";
+import resumeAsset from "@/assets/CV_VARSHINI.pdf.asset.json";
 
 const strengthIcons = [CheckCircle2, MessageSquareText, FileCheck2, Users, ShieldCheck];
 const skillIcons = [Calculator, ReceiptIndianRupee, FileCheck2, Landmark];
@@ -200,7 +201,7 @@ export function PortfolioPage() {
               <p className="location"><MapPin aria-hidden="true" />{portfolio.location}</p>
               <div className="hero-actions">
                 <Button asChild size="lg"><a href={`mailto:${portfolio.email}`}><Mail />Hire Me</a></Button>
-                <Button asChild variant="outline" size="lg"><a href="/CV_VARSHINI.pdf" download><Download />Download Resume</a></Button>
+                <Button asChild variant="outline" size="lg"><a href={resumeAsset.url} download><Download />Download Resume</a></Button>
               </div>
               <div className="hero-contacts" aria-label="Contact links">
                 <ContactLink href={`tel:${portfolio.phone}`} icon={<Phone aria-hidden="true" />}>{portfolio.phone}</ContactLink>
