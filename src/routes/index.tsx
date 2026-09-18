@@ -1,24 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { PortfolioPage } from "@/components/portfolio";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Varshini P | CA Intermediate Candidate - Audit, Taxation & GST" },
+      { name: "description", content: "Portfolio of Varshini P, a CA Intermediate candidate with articleship experience in bank audit, statutory audit, income tax, GST compliance, and financial analysis." },
+      { property: "og:title", content: "Varshini P | CA Intermediate Candidate - Audit, Taxation & GST" },
+      { property: "og:description", content: "Portfolio of Varshini P, a CA Intermediate candidate with articleship experience in bank audit, statutory audit, income tax, GST compliance, and financial analysis." },
+      { property: "og:type", content: "profile" },
+      { name: "twitter:card", content: "summary" },
+    ],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify({ "@context": "https://schema.org", "@type": "Person", name: "Varshini P", jobTitle: "CA Intermediate Candidate", address: { "@type": "PostalAddress", addressLocality: "Kallakurichi", addressRegion: "Tamil Nadu", postalCode: "606207", addressCountry: "IN" }, email: "mailto:varshup002@gmail.com", telephone: "9345275021", sameAs: ["https://www.linkedin.com/in/varshini-p-35821622a/"], alumniOf: [{ "@type": "CollegeOrUniversity", name: "Avinashilingam Institute of Home Science and Higher Education for Women" }, { "@type": "EducationalOrganization", name: "Institute of Chartered Accountants of India" }] }) }],
+  }),
+  component: PortfolioPage,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
