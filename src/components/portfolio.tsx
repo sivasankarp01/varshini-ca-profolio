@@ -106,17 +106,17 @@ function ContactForm() {
     const form = new FormData(event.currentTarget);
     const values = Object.fromEntries(form.entries());
     const nextErrors: Record<string, string> = {};
-    if (!String(values.name ?? "").trim()) nextErrors.name = "Please enter your name.";
-    if (!/^\S+@\S+\.\S+$/.test(String(values.email ?? ""))) nextErrors.email = "Please enter a valid email address.";
-    if (!String(values.subject ?? "").trim()) nextErrors.subject = "Please enter a subject.";
-    if (String(values.message ?? "").trim().length < 10) nextErrors.message = "Please enter a message of at least 10 characters.";
+    if (!String(values["name"] ?? "").trim()) nextErrors["name"] = "Please enter your name.";
+    if (!/^\S+@\S+\.\S+$/.test(String(values["email"] ?? ""))) nextErrors["email"] = "Please enter a valid email address.";
+    if (!String(values["subject"] ?? "").trim()) nextErrors["subject"] = "Please enter a subject.";
+    if (String(values["message"] ?? "").trim().length < 10) nextErrors["message"] = "Please enter a message of at least 10 characters.";
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
       setNotice("Please review the highlighted fields.");
       return;
     }
-    const subject = encodeURIComponent(String(values.subject));
-    const body = encodeURIComponent(`Name: ${values.name}\nEmail: ${values.email}\n\n${values.message}`);
+    const subject = encodeURIComponent(String(values["subject"]));
+    const body = encodeURIComponent(`Name: ${values["name"]}\nEmail: ${values["email"]}\n\n${values["message"]}`);
     setNotice("Your email application is opening. Please send the prepared message from there.");
     window.location.href = `mailto:${portfolio.email}?subject=${subject}&body=${body}`;
   }
@@ -126,11 +126,11 @@ function ContactForm() {
   return (
     <form className="contact-form" onSubmit={submit} noValidate>
       <div className="form-grid">
-        <label>Name<Input name="name" autoComplete="name" aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "name-error" : undefined} placeholder="Your name" />{fieldError("name")}</label>
-        <label>Email<Input name="email" type="email" autoComplete="email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "email-error" : undefined} placeholder="you@example.com" />{fieldError("email")}</label>
+        <label>Name<Input name="name" autoComplete="name" aria-invalid={Boolean(errors["name"])} aria-describedby={errors["name"] ? "name-error" : undefined} placeholder="Your name" />{fieldError("name")}</label>
+        <label>Email<Input name="email" type="email" autoComplete="email" aria-invalid={Boolean(errors["email"])} aria-describedby={errors["email"] ? "email-error" : undefined} placeholder="you@example.com" />{fieldError("email")}</label>
       </div>
-      <label>Subject<Input name="subject" aria-invalid={Boolean(errors.subject)} aria-describedby={errors.subject ? "subject-error" : undefined} placeholder="Role or opportunity" />{fieldError("subject")}</label>
-      <label>Message<Textarea name="message" rows={5} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "message-error" : undefined} placeholder="Tell me about the opportunity" />{fieldError("message")}</label>
+      <label>Subject<Input name="subject" aria-invalid={Boolean(errors["subject"])} aria-describedby={errors["subject"] ? "subject-error" : undefined} placeholder="Role or opportunity" />{fieldError("subject")}</label>
+      <label>Message<Textarea name="message" rows={5} aria-invalid={Boolean(errors["message"])} aria-describedby={errors["message"] ? "message-error" : undefined} placeholder="Tell me about the opportunity" />{fieldError("message")}</label>
       <Button type="submit" size="lg"><Send />Prepare Email</Button>
       <p className="form-note" aria-live="polite">{notice || "Submitting prepares an email in your email application; no message is sent automatically."}</p>
     </form>
@@ -193,7 +193,7 @@ export function PortfolioPage() {
             <SectionHeading eyebrow="About" title="Professional Profile" />
             <div className="about-layout">
               <p className="about-copy reveal">{portfolio.about}</p>
-              <div className="strengths reveal"><h3>Core Strengths</h3><div className="strength-grid">{portfolio.strengths.map((strength, index) => { const Icon = strengthIcons[index]; return <div key={strength}><Icon aria-hidden="true" /><span>{strength}</span></div>; })}</div></div>
+              <div className="strengths reveal"><h3>Core Strengths</h3><div className="strength-grid">{portfolio.strengths.map((strength, index) => { const Icon = strengthIcons[index] ?? CheckCircle2; return <div key={strength}><Icon aria-hidden="true" /><span>{strength}</span></div>; })}</div></div>
             </div>
           </div>
         </section>
@@ -213,14 +213,14 @@ export function PortfolioPage() {
         <section id="skills" className="section light-section">
           <div className="container">
             <SectionHeading eyebrow="Capabilities" title="Technical Skills" />
-            <div className="card-grid skills-grid">{portfolio.skills.map((group, index) => { const Icon = skillIcons[index]; return <article className="skill-card reveal" key={group.title}><Icon aria-hidden="true" /><h3>{group.title}</h3><ul>{group.items.map((item) => <li key={item}>{item}</li>)}</ul></article>; })}</div>
+            <div className="card-grid skills-grid">{portfolio.skills.map((group, index) => { const Icon = skillIcons[index] ?? Calculator; return <article className="skill-card reveal" key={group.title}><Icon aria-hidden="true" /><h3>{group.title}</h3><ul>{group.items.map((item) => <li key={item}>{item}</li>)}</ul></article>; })}</div>
           </div>
         </section>
 
         <section id="education" className="section">
           <div className="container">
             <SectionHeading eyebrow="Qualifications" title="Education" />
-            <div className="timeline">{portfolio.education.map((item) => <article className="timeline-item reveal" key={item.title}><div className="timeline-dot"><GraduationCap aria-hidden="true" /></div><div><p className="timeline-period">{item.period}</p><h3>{item.title}</h3>{item.institution ? <p className="institution">{item.institution}</p> : null}<p className="education-detail">{item.detail}</p></div></article>)}</div>
+            <div className="timeline">{portfolio.education.map((item) => <article className="timeline-item reveal" key={item.title}><div className="timeline-dot"><GraduationCap aria-hidden="true" /></div><div>{"period" in item ? <p className="timeline-period">{item.period}</p> : null}<h3>{item.title}</h3>{"institution" in item ? <p className="institution">{item.institution}</p> : null}<p className="education-detail">{item.detail}</p></div></article>)}</div>
           </div>
         </section>
 

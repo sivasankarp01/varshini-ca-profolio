@@ -257,8 +257,8 @@
   .contact-list { display: grid; gap: .8rem; margin: 2rem 0; }
   .contact-list .contact-link { color: var(--primary-foreground); }
   .contact-list .contact-link svg { color: color-mix(in oklab, var(--primary) 65%, white); }
-  .contact-actions [data-slot="button"]:first-child { background: var(--primary-foreground); color: var(--navy); }
-  .contact-actions [data-slot="button"]:last-child { border-color: color-mix(in oklab, var(--primary-foreground) 30%, transparent); background: transparent; color: var(--primary-foreground); }
+  .contact-actions > :first-child { background: var(--primary-foreground); color: var(--navy); }
+  .contact-actions > :last-child { border-color: color-mix(in oklab, var(--primary-foreground) 30%, transparent); background: transparent; color: var(--primary-foreground); }
   .contact-form { display: grid; gap: 1rem; padding: 2rem; border-radius: var(--radius); background: var(--surface); color: var(--navy); }
   .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
   .contact-form label { display: grid; gap: .45rem; font-size: .78rem; font-weight: 700; }
